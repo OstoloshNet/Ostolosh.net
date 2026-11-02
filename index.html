@@ -13,15 +13,21 @@
 <style>
 /* Layout: one calm column of cards. A fibre line linking four villages runs under the hero, and payment points are grouped by village. */
 :root {
-  --bg: #F1F5F7;
+  --bg: #F2F2F0;
   --surface: #FFFFFF;
-  --ink: #0C2230;
-  --muted: #4F6477;
-  --line: #D3DDE4;
-  --accent: #00797A;
-  --accent-ink: #FFFFFF;
-  --accent-soft: #DDF1F0;
-  --signal: #E6A800;
+  --ink: #111111;
+  --muted: #595954;
+  --line: #DAD9D3;
+  --accent: #FFD400;
+  --accent-ink: #111111;
+  --accent-soft: #FFF1A6;
+  --accent-text: #7A5A00;
+  --focus: #111111;
+  --signal: #E3A900;
+  --panel: #111111;
+  --panel-ink: #F4F4F0;
+  --panel-muted: #A9A9A0;
+  --panel-line: #353531;
   --ok: #17794A;
   --viber: #6A56E6;
   --f-display: "Unbounded", "Onest", system-ui, sans-serif;
@@ -30,30 +36,42 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #09171F;
-    --surface: #102330;
-    --ink: #E5EEF3;
-    --muted: #94A9B9;
-    --line: #213847;
-    --accent: #3FD2C8;
-    --accent-ink: #04211F;
-    --accent-soft: #123A3C;
-    --signal: #F5C32C;
+    --bg: #0A0A0A;
+    --surface: #151515;
+    --ink: #F4F4F0;
+    --muted: #A5A59C;
+    --line: #2B2B27;
+    --accent: #FFD400;
+    --accent-ink: #0A0A0A;
+    --accent-soft: #2B2400;
+    --accent-text: #FFD400;
+    --focus: #FFD400;
+    --signal: #FFD400;
+    --panel: #1B1B18;
+    --panel-ink: #F4F4F0;
+    --panel-muted: #A5A59C;
+    --panel-line: #3A3A34;
     --ok: #5BD08F;
     --viber: #8A78FF;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #09171F;
-  --surface: #102330;
-  --ink: #E5EEF3;
-  --muted: #94A9B9;
-  --line: #213847;
-  --accent: #3FD2C8;
-  --accent-ink: #04211F;
-  --accent-soft: #123A3C;
-  --signal: #F5C32C;
+  --bg: #0A0A0A;
+  --surface: #151515;
+  --ink: #F4F4F0;
+  --muted: #A5A59C;
+  --line: #2B2B27;
+  --accent: #FFD400;
+  --accent-ink: #0A0A0A;
+  --accent-soft: #2B2400;
+  --accent-text: #FFD400;
+  --focus: #FFD400;
+  --signal: #FFD400;
+  --panel: #1B1B18;
+  --panel-ink: #F4F4F0;
+  --panel-muted: #A5A59C;
+  --panel-line: #3A3A34;
   --ok: #5BD08F;
   --viber: #8A78FF;
   color-scheme: dark;
@@ -73,7 +91,7 @@ body {
 }
 .wrap { width: 100%; max-width: 1120px; margin-inline: auto; }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
 h1, h2, h3, p { margin: 0; }
 h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; letter-spacing: -0.01em; }
 .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
@@ -81,8 +99,8 @@ h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; le
 /* Header */
 .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; padding-block: 18px 6px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 600 1.05rem/1 var(--f-display); }
-.brand i { font-style: normal; color: var(--accent); }
-.brand svg { width: 30px; height: 30px; color: var(--accent); }
+.brand i { font-style: normal; color: var(--accent-text); }
+.brand svg { width: 32px; height: 32px; }
 .ctrl { display: flex; flex-wrap: wrap; gap: 8px; }
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 3px; gap: 2px; }
 .seg button { font: 500 0.82rem/1 var(--f-body); color: var(--muted); background: transparent; border: 0; border-radius: 7px; padding: 8px 11px; cursor: pointer; min-height: 34px; }
@@ -94,16 +112,16 @@ h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; le
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 600 0.98rem/1.2 var(--f-body); text-decoration: none; cursor: pointer; text-align: center; }
-.btn:hover { border-color: var(--accent); }
+.btn:hover { border-color: var(--ink); }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.btn.primary:hover { filter: brightness(1.08); }
+.btn.primary:hover { filter: brightness(0.94); border-color: var(--ink); }
 .btn.viber { background: var(--viber); border-color: var(--viber); color: #fff; }
 .btn.viber:hover { filter: brightness(1.08); }
 .btn.small { min-height: 36px; padding: 7px 12px; font-size: 0.85rem; font-weight: 500; }
 
 /* Hero */
 .hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; padding-block: 36px 20px; align-items: start; }
-.eyebrow { font: 500 0.78rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 18px; }
+.eyebrow { font: 500 0.78rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-text); margin-bottom: 18px; }
 .hero h1 { font-size: clamp(1.7rem, 4.4vw, 3.1rem); line-height: 1.12; hyphens: auto; }
 .lead { margin-top: 18px; color: var(--muted); font-size: 1.1rem; max-width: 54ch; }
 .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
@@ -116,12 +134,24 @@ h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; le
 .status.open .dot { background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 22%, transparent); }
 .status.open { color: var(--ink); }
 
+/* Support panel: black with yellow number in both themes */
+.support { background: var(--panel); color: var(--panel-ink); border-color: var(--panel-line); }
+.support h2 { color: var(--panel-muted); }
+.support .phone { color: var(--accent); }
+.support .btn.small { background: transparent; color: var(--panel-ink); border-color: var(--panel-line); }
+.support .btn.small:hover { border-color: var(--accent); }
+.support .status { border-top-color: var(--panel-line); color: var(--panel-muted); }
+.support .status.open { color: var(--panel-ink); }
+.support :focus-visible { outline-color: var(--accent); }
+.support .dot { background: var(--panel-muted); }
+.support .status.open .dot { background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+
 /* Village route */
 .route-wrap { padding-block: 8px 12px; }
 .route-label { font: 500 0.78rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 16px; }
 .route { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 0; }
 .route li { position: relative; padding-top: 22px; font-weight: 500; padding-right: 10px; }
-.route li::before { content: ""; position: absolute; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); z-index: 1; }
+.route li::before { content: ""; position: absolute; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--ink); z-index: 1; }
 .route li::after { content: ""; position: absolute; left: 14px; right: 0; top: 5px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--line) 0 35%, var(--signal) 50%, var(--line) 65% 100%); background-size: 300% 100%; animation: pulse 4.5s linear infinite; }
 .route li:last-child::after { display: none; }
 @keyframes pulse { from { background-position: 100% 0; } to { background-position: 0 0; } }
@@ -138,17 +168,17 @@ section { padding-top: 56px; scroll-margin-top: 8px; }
 .post { display: flex; flex-direction: column; gap: 12px; }
 .post time { font: 400 0.8rem/1 var(--f-mono); color: var(--muted); }
 .post .text { display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-line; overflow-wrap: anywhere; }
-.post a.more { margin-top: auto; color: var(--accent); font-weight: 600; text-decoration: none; }
+.post a.more { margin-top: auto; color: var(--accent-text); font-weight: 600; text-decoration: none; }
 .post a.more:hover { text-decoration: underline; }
 .post .meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.badge { font: 500 0.7rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); }
+.badge { font: 500 0.7rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent-text); }
 
 /* Payments */
 .pay-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; }
 .methods { display: grid; gap: 12px; align-content: start; }
 .method { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none; padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); font: 600 1.05rem/1.2 var(--f-body); }
-.method:hover { border-color: var(--accent); }
-.method span { color: var(--accent); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
+.method:hover { border-color: var(--ink); }
+.method span { color: var(--accent-text); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
 h3 { font: 600 1.02rem/1.3 var(--f-body); }
 .req { display: grid; gap: 0; margin: 16px 0 0; }
 .req > div { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
@@ -170,9 +200,9 @@ h3 { font: 600 1.02rem/1.3 var(--f-body); }
 .speed { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
 .tests { display: grid; gap: 10px; margin-top: 16px; }
 .tests a { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; text-decoration: none; font-weight: 600; background: var(--bg); }
-.tests a:hover { border-color: var(--accent); }
+.tests a:hover { border-color: var(--ink); }
 .tests a small { color: var(--muted); font-weight: 400; display: block; font-size: 0.82rem; }
-.tests a span.go { color: var(--accent); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
+.tests a span.go { color: var(--accent-text); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
 .tips { margin: 14px 0 0; padding-left: 20px; display: grid; gap: 8px; color: var(--muted); }
 .frame { width: 100%; height: 520px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
 
@@ -190,10 +220,26 @@ h3 { font: 600 1.02rem/1.3 var(--f-body); }
 .contact .card p { color: var(--muted); margin-top: 8px; }
 .contact .card .btn { margin-top: 16px; }
 
+/* Contact form */
+.form { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 24px 32px; }
+.form p.sub { color: var(--muted); margin-top: 8px; }
+.form .priv { color: var(--muted); font-size: 0.85rem; margin-top: 14px; }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.fields .full { grid-column: 1 / -1; }
+.field label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
+.field input, .field select, .field textarea { width: 100%; min-height: 48px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 1rem/1.4 var(--f-body); }
+.field textarea { min-height: 128px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 3px solid var(--focus); outline-offset: 1px; border-color: var(--ink); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-msg { grid-column: 1 / -1; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); font-size: 0.95rem; }
+.form-msg.ok { border-color: var(--ok); }
+.form-msg.err { border-color: #D6453D; }
+.form-msg[hidden] { display: none; }
+
 footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; }
 
 @media (max-width: 860px) {
-  .hero, .pay-grid, .speed { grid-template-columns: minmax(0, 1fr); }
+  .hero, .pay-grid, .speed, .form { grid-template-columns: minmax(0, 1fr); }
   .hero { padding-block-start: 24px; }
 }
 @media (max-width: 640px) {
@@ -204,6 +250,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
   .btn { flex: 1 1 100%; }
   .btn.small { flex: 0 0 auto; }
   .frame { height: 440px; }
+  .fields { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -214,7 +261,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
 <div class="wrap">
   <header class="top">
     <a class="brand" href="#top" aria-label="Ostolosh.net">
-      <svg viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M3 21c5 0 6-12 12-12s7 12 12 12" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="3" cy="21" r="2.6" fill="currentColor"/><circle cx="15" cy="9" r="2.6" fill="currentColor"/><circle cx="27" cy="21" r="2.6" fill="currentColor"/></svg>
+      <svg viewBox="0 0 30 30" fill="none" aria-hidden="true"><rect width="30" height="30" rx="8" fill="#FFD400"/><path d="M5 20c4 0 5-10 10-10s6 10 10 10" stroke="#111" stroke-width="2.6" stroke-linecap="round"/><circle cx="5" cy="20" r="2.3" fill="#111"/><circle cx="15" cy="10" r="2.3" fill="#111"/><circle cx="25" cy="20" r="2.3" fill="#111"/></svg>
       <span>ostolosh<i>.net</i></span>
     </a>
     <div class="ctrl">
@@ -379,6 +426,23 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
           <a class="btn primary" href="http://cabinet.ostolosh.net" target="_blank" rel="noopener" data-i18n="ctaCabinet">Увійти в кабінет</a>
         </div>
       </div>
+
+      <form class="card form" id="contactForm" novalidate>
+        <div>
+          <h3 data-i18n="formT">Написати нам</h3>
+          <p class="sub" data-i18n="formSub">Опишіть питання про підключення, оплату чи швидкість. Повідомлення надійде до нас у Telegram.</p>
+          <p class="priv" data-i18n="formPriv">Ці дані потрібні лише для відповіді на ваше звернення.</p>
+        </div>
+        <div class="fields">
+          <div class="field"><label for="cName" data-i18n="fName">Ім’я</label><input id="cName" name="name" type="text" autocomplete="name" maxlength="80" required></div>
+          <div class="field"><label for="cPhone" data-i18n="fPhone">Телефон</label><input id="cPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="096 000 00 00" required></div>
+          <div class="field full"><label for="cVillage" data-i18n="fVillage">Село</label><select id="cVillage" name="village"></select></div>
+          <div class="field full"><label for="cMsg" data-i18n="fMsg">Повідомлення</label><textarea id="cMsg" name="message" maxlength="1500" required></textarea></div>
+          <div class="hp" aria-hidden="true"><label for="cWeb">Website</label><input id="cWeb" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <div class="full"><button type="submit" class="btn primary" id="cSend" data-i18n="fSend">Надіслати</button></div>
+          <p class="form-msg" id="formMsg" role="status" hidden></p>
+        </div>
+      </form>
     </section>
   </main>
 
@@ -396,6 +460,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     viberUrl: "https://invite.viber.com/",      // put your group invite link here
     facebookUrl: "https://www.facebook.com/",   // put your page link here
     newsUrl: "news.json",                       // file produced by news-sync.py
+    contactUrl: "contact.php",                             // e.g. "contact.php" (see contact.php, it forwards to Telegram)
     speedtestEmbedUrl: "",                      // e.g. "/speedtest/" for a self-hosted LibreSpeed
     timezone: "Europe/Kyiv"
   };
@@ -432,6 +497,14 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       contT: "Контакти", hoursT: "Години роботи", hMonFri: "Понеділок – п’ятниця", hSat: "Субота", hSun: "Неділя", hOff: "вихідний",
       hoursNote: "У неділю, державні та церковні свята не працюємо.",
       cabT: "Особовий кабінет", cabTxt: "Баланс, платежі та дані вашого підключення.", legal: "ФОП Остолош В. В.",
+      formT: "Написати нам", formSub: "Опишіть питання про підключення, оплату чи швидкість. Повідомлення надійде до нас у Telegram.",
+      formPriv: "Ці дані потрібні лише для відповіді на ваше звернення.",
+      fName: "Ім’я", fPhone: "Телефон", fVillage: "Село", fVillageOther: "Інше", fMsg: "Повідомлення", fSend: "Надіслати", fSending: "Надсилаємо…",
+      fOk: "Дякуємо! Повідомлення надіслано. Ми зв’яжемося з вами в робочий час.",
+      fErrFields: "Заповніть ім’я, телефон і повідомлення.",
+      fErrNet: "Не вдалося надіслати. Спробуйте ще раз або зателефонуйте в підтримку.",
+      fErrRate: "Забагато спроб. Зачекайте хвилину й повторіть.",
+      fDemo: "У цій демонстраційній версії форма не підключена до Telegram. На вашому сервері вона надсилатиме повідомлення в бот.",
       dayAt: ["в неділю", "в понеділок", "у вівторок", "в середу", "в четвер", "в п’ятницю", "в суботу"]
     },
     en: {
@@ -465,6 +538,14 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       contT: "Contacts", hoursT: "Opening hours", hMonFri: "Monday – Friday", hSat: "Saturday", hSun: "Sunday", hOff: "closed",
       hoursNote: "We are closed on Sundays and on public and church holidays.",
       cabT: "My account", cabTxt: "Balance, payments and your connection details.", legal: "Sole proprietor V. Ostolosh",
+      formT: "Write to us", formSub: "Tell us about a connection, payment or speed issue. Your message reaches us in Telegram.",
+      formPriv: "We use these details only to reply to your request.",
+      fName: "Name", fPhone: "Phone", fVillage: "Village", fVillageOther: "Other", fMsg: "Message", fSend: "Send", fSending: "Sending…",
+      fOk: "Thank you! Your message was sent. We will contact you during working hours.",
+      fErrFields: "Please fill in your name, phone and message.",
+      fErrNet: "Could not send. Try again or call support.",
+      fErrRate: "Too many attempts. Wait a minute and try again.",
+      fDemo: "In this demo the form is not connected to Telegram. On your server it will send messages to the bot.",
       dayAt: ["on Sunday", "on Monday", "on Tuesday", "on Wednesday", "on Thursday", "on Friday", "on Saturday"]
     }
   };
@@ -628,6 +709,45 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     } catch (e) { done([], false); }
   }
 
+  /* Contact form */
+  function renderForm() {
+    var sel = $("#cVillage"), prev = sel.value;
+    sel.textContent = "";
+    VILLAGES.forEach(function (v, i) { var o = el("option", "", v.n[lang]); o.value = String(i); sel.appendChild(o); });
+    var other = el("option", "", t("fVillageOther")); other.value = "other"; sel.appendChild(other);
+    if (prev) sel.value = prev;
+  }
+  function formMsg(kind, text) {
+    var m = $("#formMsg");
+    m.hidden = !text; m.className = "form-msg " + (kind || ""); m.textContent = text || "";
+  }
+  $("#contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = $("#cName").value.trim(), phone = $("#cPhone").value.trim(), msg = $("#cMsg").value.trim();
+    if (name.length < 2 || phone.replace(/\D/g, "").length < 7 || msg.length < 5) { formMsg("err", t("fErrFields")); return; }
+    if ($("#cWeb").value) { formMsg("ok", t("fOk")); return; }
+    if (!CONFIG.contactUrl) { formMsg("", t("fDemo")); return; }
+    var btn = $("#cSend"), vi = $("#cVillage").value;
+    btn.disabled = true; btn.textContent = t("fSending"); formMsg("", "");
+    var payload = {
+      name: name, phone: phone, message: msg, lang: lang,
+      village: vi === "other" ? "—" : VILLAGES[+vi].n.uk
+    };
+    fetch(CONFIG.contactUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+      .then(function (r) {
+        if (r.status === 429) throw new Error("rate");
+        if (!r.ok) throw new Error("fail");
+        return r.json();
+      })
+      .then(function (d) {
+        if (!d || !d.ok) throw new Error("fail");
+        formMsg("ok", t("fOk"));
+        $("#cName").value = ""; $("#cPhone").value = ""; $("#cMsg").value = "";
+      })
+      .catch(function (err) { formMsg("err", t(err && err.message === "rate" ? "fErrRate" : "fErrNet")); })
+      .then(function () { btn.disabled = false; btn.textContent = t("fSend"); });
+  });
+
   /* Language */
   function applyLang(l) {
     lang = l;
@@ -635,7 +755,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     $$("[data-i18n]").forEach(function (n) { n.textContent = t(n.dataset.i18n); });
     $$("[data-i18n-aria]").forEach(function (n) { n.setAttribute("aria-label", t(n.dataset.i18nAria)); });
     $$("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
-    renderVillages(); renderStatus(); renderNews();
+    renderVillages(); renderForm(); renderStatus(); renderNews();
   }
 
   /* Copy */
