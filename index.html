@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<style>:root{color-scheme:light}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Ostolosh.net</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
+<style>
+/* Layout: one calm column of cards. A fibre line linking four villages runs under the hero, and payment points are grouped by village. */
+:root {
+  --bg: #F1F5F7;
+  --surface: #FFFFFF;
+  --ink: #0C2230;
+  --muted: #4F6477;
+  --line: #D3DDE4;
+  --accent: #00797A;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #DDF1F0;
+  --signal: #E6A800;
+  --ok: #17794A;
+  --viber: #6A56E6;
+  --f-display: "Unbounded", "Onest", system-ui, sans-serif;
+  --f-body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #09171F;
+    --surface: #102330;
+    --ink: #E5EEF3;
+    --muted: #94A9B9;
+    --line: #213847;
+    --accent: #3FD2C8;
+    --accent-ink: #04211F;
+    --accent-soft: #123A3C;
+    --signal: #F5C32C;
+    --ok: #5BD08F;
+    --viber: #8A78FF;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #09171F;
+  --surface: #102330;
+  --ink: #E5EEF3;
+  --muted: #94A9B9;
+  --line: #213847;
+  --accent: #3FD2C8;
+  --accent-ink: #04211F;
+  --accent-soft: #123A3C;
+  --signal: #F5C32C;
+  --ok: #5BD08F;
+  --viber: #8A78FF;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.55 var(--f-body);
+  padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { width: 100%; max-width: 1120px; margin-inline: auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; letter-spacing: -0.01em; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* Header */
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; padding-block: 18px 6px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 600 1.05rem/1 var(--f-display); }
+.brand i { font-style: normal; color: var(--accent); }
+.brand svg { width: 30px; height: 30px; color: var(--accent); }
+.ctrl { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 3px; gap: 2px; }
+.seg button { font: 500 0.82rem/1 var(--f-body); color: var(--muted); background: transparent; border: 0; border-radius: 7px; padding: 8px 11px; cursor: pointer; min-height: 34px; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.nav { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a { white-space: nowrap; text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; padding: 8px 14px; border-radius: 999px; border: 1px solid transparent; }
+.nav a:hover { color: var(--ink); border-color: var(--line); background: var(--surface); }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 600 0.98rem/1.2 var(--f-body); text-decoration: none; cursor: pointer; text-align: center; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.viber { background: var(--viber); border-color: var(--viber); color: #fff; }
+.btn.viber:hover { filter: brightness(1.08); }
+.btn.small { min-height: 36px; padding: 7px 12px; font-size: 0.85rem; font-weight: 500; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; padding-block: 36px 20px; align-items: start; }
+.eyebrow { font: 500 0.78rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 18px; }
+.hero h1 { font-size: clamp(1.7rem, 4.4vw, 3.1rem); line-height: 1.12; hyphens: auto; }
+.lead { margin-top: 18px; color: var(--muted); font-size: 1.1rem; max-width: 54ch; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; min-width: 0; }
+.support h2 { font: 500 0.78rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.phone { display: block; margin-top: 14px; font: 500 clamp(1.5rem, 3.6vw, 2rem)/1.1 var(--f-mono); text-decoration: none; letter-spacing: -0.02em; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.status { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+.dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--muted); margin-top: 7px; }
+.status.open .dot { background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 22%, transparent); }
+.status.open { color: var(--ink); }
+
+/* Village route */
+.route-wrap { padding-block: 8px 12px; }
+.route-label { font: 500 0.78rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 16px; }
+.route { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 0; }
+.route li { position: relative; padding-top: 22px; font-weight: 500; padding-right: 10px; }
+.route li::before { content: ""; position: absolute; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); z-index: 1; }
+.route li::after { content: ""; position: absolute; left: 14px; right: 0; top: 5px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--line) 0 35%, var(--signal) 50%, var(--line) 65% 100%); background-size: 300% 100%; animation: pulse 4.5s linear infinite; }
+.route li:last-child::after { display: none; }
+@keyframes pulse { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+/* Sections */
+section { padding-top: 56px; scroll-margin-top: 8px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px 24px; margin-bottom: 22px; }
+.sec-head h2 { font-size: clamp(1.35rem, 2.8vw, 1.95rem); }
+.sec-head p { color: var(--muted); margin-top: 8px; max-width: 58ch; }
+.note { color: var(--muted); font-size: 0.9rem; margin-top: 14px; }
+
+/* News */
+.news { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+.post { display: flex; flex-direction: column; gap: 12px; }
+.post time { font: 400 0.8rem/1 var(--f-mono); color: var(--muted); }
+.post .text { display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-line; overflow-wrap: anywhere; }
+.post a.more { margin-top: auto; color: var(--accent); font-weight: 600; text-decoration: none; }
+.post a.more:hover { text-decoration: underline; }
+.post .meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.badge { font: 500 0.7rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); }
+
+/* Payments */
+.pay-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; }
+.methods { display: grid; gap: 12px; align-content: start; }
+.method { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none; padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); font: 600 1.05rem/1.2 var(--f-body); }
+.method:hover { border-color: var(--accent); }
+.method span { color: var(--accent); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
+h3 { font: 600 1.02rem/1.3 var(--f-body); }
+.req { display: grid; gap: 0; margin: 16px 0 0; }
+.req > div { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
+.req dt { color: var(--muted); font-size: 0.88rem; }
+.req dd { margin: 0; overflow-wrap: anywhere; }
+.req dd.mono { font-size: 0.92rem; }
+.card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.villages { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; margin-top: 16px; }
+.village h3 { font-family: var(--f-display); font-weight: 500; font-size: 1rem; margin-bottom: 14px; }
+.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.pts li { display: grid; gap: 2px; padding-left: 12px; border-left: 3px solid var(--line); }
+.pts li.t-np { border-color: #E3342F; }
+.pts li.t-up { border-color: var(--signal); }
+.pts li.t-term { border-color: var(--accent); }
+.pts .k { font: 500 0.74rem/1.2 var(--f-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.pts .a { overflow-wrap: anywhere; }
+
+/* Speed */
+.speed { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.tests { display: grid; gap: 10px; margin-top: 16px; }
+.tests a { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; text-decoration: none; font-weight: 600; background: var(--bg); }
+.tests a:hover { border-color: var(--accent); }
+.tests a small { color: var(--muted); font-weight: 400; display: block; font-size: 0.82rem; }
+.tests a span.go { color: var(--accent); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
+.tips { margin: 14px 0 0; padding-left: 20px; display: grid; gap: 8px; color: var(--muted); }
+.frame { width: 100%; height: 520px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+
+/* Community */
+.comm { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.comm .card p { color: var(--muted); margin: 8px 0 18px; }
+.comm .card.viber-card { border-color: color-mix(in srgb, var(--viber) 55%, var(--line)); }
+
+/* Contacts */
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.hours { margin: 14px 0 0; display: grid; gap: 0; }
+.hours > div { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); }
+.hours dt { color: var(--muted); }
+.hours dd { margin: 0; text-align: right; }
+.contact .card p { color: var(--muted); margin-top: 8px; }
+.contact .card .btn { margin-top: 16px; }
+
+footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; }
+
+@media (max-width: 860px) {
+  .hero, .pay-grid, .speed { grid-template-columns: minmax(0, 1fr); }
+  .hero { padding-block-start: 24px; }
+}
+@media (max-width: 640px) {
+  .route { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .route li:nth-child(2)::after { display: none; }
+  .req > div { grid-template-columns: minmax(0, 1fr) auto; }
+  .req dt { grid-column: 1 / -1; }
+  .btn { flex: 1 1 100%; }
+  .btn.small { flex: 0 0 auto; }
+  .frame { height: 440px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .route li::after { animation: none; background: var(--line); }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Ostolosh.net">
+      <svg viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M3 21c5 0 6-12 12-12s7 12 12 12" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="3" cy="21" r="2.6" fill="currentColor"/><circle cx="15" cy="9" r="2.6" fill="currentColor"/><circle cx="27" cy="21" r="2.6" fill="currentColor"/></svg>
+      <span>ostolosh<i>.net</i></span>
+    </a>
+    <div class="ctrl">
+      <div class="seg" role="group" data-i18n-aria="langLabel" id="langSeg">
+        <button type="button" data-lang="uk" aria-pressed="true">UA</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <div class="seg" role="group" data-i18n-aria="themeLabel" id="themeSeg">
+        <button type="button" data-theme-set="auto" data-i18n="themeAuto" aria-pressed="true">Авто</button>
+        <button type="button" data-theme-set="light" data-i18n="themeLight" aria-pressed="false">Світла</button>
+        <button type="button" data-theme-set="dark" data-i18n="themeDark" aria-pressed="false">Темна</button>
+      </div>
+    </div>
+  </header>
+  <nav class="nav" aria-label="Menu">
+    <a href="#news" data-i18n="navNews">Новини</a>
+    <a href="#pay" data-i18n="navPay">Оплата</a>
+    <a href="#speed" data-i18n="navSpeed">Швидкість</a>
+    <a href="#community" data-i18n="navComm">Viber</a>
+    <a href="#contact" data-i18n="navContact">Контакти</a>
+  </nav>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <p class="eyebrow" data-i18n="heroEye">Інтернет-провайдер</p>
+        <h1 data-i18n="heroH1">Рахунок, оплата й новини мережі в одному місці</h1>
+        <p class="lead" data-i18n="heroLead">Увійдіть в особовий кабінет, сплатіть послуги онлайн або дізнайтеся про роботи на мережі.</p>
+        <div class="cta">
+          <a class="btn primary" id="cabinetBtn" href="http://cabinet.ostolosh.net" target="_blank" rel="noopener" data-i18n="ctaCabinet">Увійти в кабінет</a>
+          <a class="btn" href="#pay" data-i18n="ctaPay">Сплатити за інтернет</a>
+        </div>
+      </div>
+      <aside class="card support" aria-labelledby="supT">
+        <h2 id="supT" data-i18n="supportT">Технічна підтримка</h2>
+        <a class="phone" id="phoneLink" href="tel:+380966847704">096-684-77-04</a>
+        <div class="row">
+          <button type="button" class="btn small" data-copy="096-684-77-04" data-i18n="copy">Копіювати</button>
+          <a class="btn small" href="tel:+380966847704" data-i18n="call">Подзвонити</a>
+        </div>
+        <div class="status" id="status" role="status"><span class="dot" aria-hidden="true"></span><span id="statusText"></span></div>
+      </aside>
+    </div>
+
+    <div class="route-wrap">
+      <p class="route-label" data-i18n="routeT">Пункти оплати в селах</p>
+      <ol class="route" id="route"></ol>
+    </div>
+
+    <section id="news" aria-labelledby="newsH">
+      <div class="sec-head">
+        <div>
+          <h2 id="newsH" data-i18n="newsT">Новини мережі</h2>
+          <p data-i18n="newsSub">Публікації з нашої сторінки у Facebook з’являються тут автоматично.</p>
+        </div>
+        <a class="btn small" id="fbBtn" href="https://www.facebook.com/" target="_blank" rel="noopener" data-i18n="fbBtn">Сторінка у Facebook</a>
+      </div>
+      <div class="news" id="newsList"></div>
+      <p class="note" id="newsNote"></p>
+    </section>
+
+    <section id="pay" aria-labelledby="payH">
+      <div class="sec-head">
+        <div>
+          <h2 id="payH" data-i18n="payT">Оплата послуг</h2>
+          <p data-i18n="paySub">Онлайн, за реквізитами або готівкою в найближчому пункті.</p>
+        </div>
+      </div>
+      <div class="pay-grid">
+        <div class="methods">
+          <a class="method" target="_blank" rel="noopener" href="https://next.privat24.ua/payments/form/%7B%22token%22%3A%221333ab9f-985a-4970-970a-a54d54dfacc9%22%7D">Privat24 <span data-i18n="open">Відкрити ↗</span></a>
+          <a class="method" target="_blank" rel="noopener" href="https://easypay.ua/ua/catalog/internet/ostolosh-int">EasyPay <span data-i18n="open">Відкрити ↗</span></a>
+          <a class="method" target="_blank" rel="noopener" href="https://city24.ua/ua/popolnit-internet/ostolosh-net">City24 <span data-i18n="open">Відкрити ↗</span></a>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3 data-i18n="reqT">За реквізитами</h3>
+            <button type="button" class="btn small" id="copyAll" data-i18n="copyAll">Копіювати все</button>
+          </div>
+          <dl class="req">
+            <div><dt data-i18n="rRecipient">Одержувач</dt><dd id="rv1">ФОП Остолош Владислав Васильович</dd><dd><button type="button" class="btn small" data-copy-from="rv1" data-i18n="copy">Копіювати</button></dd></div>
+            <div><dt data-i18n="rCode">ЄДРПОУ</dt><dd class="mono" id="rv2">3234120698</dd><dd><button type="button" class="btn small" data-copy-from="rv2" data-i18n="copy">Копіювати</button></dd></div>
+            <div><dt>IBAN</dt><dd class="mono" id="rv3">UA663052990000026001013601971</dd><dd><button type="button" class="btn small" data-copy-from="rv3" data-i18n="copy">Копіювати</button></dd></div>
+            <div><dt data-i18n="rBank">Банк</dt><dd id="rv4" data-i18n="bankName">АТ КБ «ПриватБанк»</dd><dd><button type="button" class="btn small" data-copy-from="rv4" data-i18n="copy">Копіювати</button></dd></div>
+          </dl>
+        </div>
+      </div>
+      <h3 style="margin-top:32px" data-i18n="pointsT">Де сплатити поруч</h3>
+      <p class="note" style="margin-top:6px" data-i18n="pointsSub">Нова Пошта, Укрпошта та термінали самообслуговування.</p>
+      <div class="villages" id="villages"></div>
+    </section>
+
+    <section id="speed" aria-labelledby="speedH">
+      <div class="sec-head">
+        <div>
+          <h2 id="speedH" data-i18n="speedT">Перевірка швидкості</h2>
+          <p data-i18n="speedSub">Зробіть заміри, перш ніж звертатися в підтримку: так ми швидше знайдемо причину.</p>
+        </div>
+      </div>
+      <div id="speedBox">
+        <div class="speed">
+          <div class="card">
+            <h3 data-i18n="speedHow">Як виміряти точно</h3>
+            <ol class="tips">
+              <li data-i18n="tip1">Підключіть пристрій кабелем, а не через Wi-Fi.</li>
+              <li data-i18n="tip2">Зупиніть завантаження, відео й оновлення на інших пристроях.</li>
+              <li data-i18n="tip3">Зробіть 2–3 заміри й запишіть найгірший результат.</li>
+              <li data-i18n="tip4">Якщо швидкість нижча за тариф, зателефонуйте в підтримку й назвіть результат.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3 data-i18n="speedPick">Відкрити тест</h3>
+            <div class="tests">
+              <a href="https://www.speedtest.net/" target="_blank" rel="noopener"><div>Speedtest <small>Ookla</small></div><span class="go" data-i18n="open">Відкрити ↗</span></a>
+              <a href="https://fast.com/" target="_blank" rel="noopener"><div>Fast.com <small>Netflix</small></div><span class="go" data-i18n="open">Відкрити ↗</span></a>
+              <a href="https://speed.cloudflare.com/" target="_blank" rel="noopener"><div>Cloudflare Speed Test <small data-i18n="cfNote">Показує також затримку й втрати пакетів</small></div><span class="go" data-i18n="open">Відкрити ↗</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="community" aria-labelledby="commH">
+      <div class="sec-head">
+        <div><h2 id="commH" data-i18n="commT">Будьте на зв’язку</h2></div>
+      </div>
+      <div class="comm">
+        <div class="card viber-card">
+          <h3 data-i18n="viberT">Група у Viber</h3>
+          <p data-i18n="viberTxt">Оперативні повідомлення про роботи на мережі та відповіді на поширені запитання.</p>
+          <a class="btn viber" id="viberBtn" href="https://invite.viber.com/" target="_blank" rel="noopener" data-i18n="viberBtn">Приєднатися до групи</a>
+        </div>
+        <div class="card">
+          <h3>Facebook</h3>
+          <p data-i18n="fbTxt">Усі оголошення також публікуються на нашій сторінці.</p>
+          <a class="btn" id="fbBtn2" href="https://www.facebook.com/" target="_blank" rel="noopener" data-i18n="fbBtn">Сторінка у Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contH">
+      <div class="sec-head">
+        <div><h2 id="contH" data-i18n="contT">Контакти</h2></div>
+      </div>
+      <div class="contact">
+        <div class="card">
+          <h3 data-i18n="supportT">Технічна підтримка</h3>
+          <a class="phone" href="tel:+380966847704" style="font-size:1.5rem">096-684-77-04</a>
+          <p data-i18n="hoursNote">У неділю, державні та церковні свята не працюємо.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="hoursT">Години роботи</h3>
+          <dl class="hours">
+            <div><dt data-i18n="hMonFri">Понеділок – п’ятниця</dt><dd class="mono">9:00 – 18:00</dd></div>
+            <div><dt data-i18n="hSat">Субота</dt><dd class="mono">9:00 – 16:00</dd></div>
+            <div><dt data-i18n="hSun">Неділя</dt><dd data-i18n="hOff">вихідний</dd></div>
+          </dl>
+        </div>
+        <div class="card">
+          <h3 data-i18n="cabT">Особовий кабінет</h3>
+          <p data-i18n="cabTxt">Баланс, платежі та дані вашого підключення.</p>
+          <a class="btn primary" href="http://cabinet.ostolosh.net" target="_blank" rel="noopener" data-i18n="ctaCabinet">Увійти в кабінет</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year">2026</span> Ostolosh.net</span>
+    <span data-i18n="legal">ФОП Остолош В. В.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  /* ===== Settings: change these on your own server ===== */
+  var CONFIG = {
+    cabinetUrl: "http://cabinet.ostolosh.net",
+    viberUrl: "https://invite.viber.com/",      // put your group invite link here
+    facebookUrl: "https://www.facebook.com/",   // put your page link here
+    newsUrl: "news.json",                       // file produced by news-sync.py
+    speedtestEmbedUrl: "",                      // e.g. "/speedtest/" for a self-hosted LibreSpeed
+    timezone: "Europe/Kyiv"
+  };
+
+  var I18N = {
+    uk: {
+      langLabel: "Мова", themeLabel: "Колірна схема", themeAuto: "Авто", themeLight: "Світла", themeDark: "Темна",
+      navNews: "Новини", navPay: "Оплата", navSpeed: "Швидкість", navComm: "Viber", navContact: "Контакти",
+      heroEye: "Інтернет-провайдер",
+      heroH1: "Рахунок, оплата й новини мережі в одному місці",
+      heroLead: "Увійдіть в особовий кабінет, сплатіть послуги онлайн або дізнайтеся про роботи на мережі.",
+      ctaCabinet: "Увійти в кабінет", ctaPay: "Сплатити за інтернет",
+      supportT: "Технічна підтримка", copy: "Копіювати", copied: "Скопійовано", copyFail: "Виділено, натисніть Ctrl+C", call: "Подзвонити", copyAll: "Копіювати все",
+      openNow: "Зараз відчинено, до {t}", closedToday: "Зараз зачинено. Відкриємося сьогодні о {t}", closedNext: "Зараз зачинено. Відкриємося {d} о {t}",
+      routeT: "Пункти оплати в селах",
+      newsT: "Новини мережі", newsSub: "Публікації з нашої сторінки у Facebook з’являються тут автоматично.",
+      fbBtn: "Сторінка у Facebook", readFb: "Читати у Facebook", sample: "Приклад",
+      sampleNote: "Це приклади оформлення. Після підключення Facebook тут з’являться ваші публікації.",
+      liveNote: "Оновлюється автоматично з Facebook.", empty: "Поки що немає публікацій.",
+      s1: "Планові роботи на мережі. Інтернет може тимчасово зникати. Дякуємо за розуміння.",
+      s2: "Нагадуємо: сплатити за послуги можна онлайн, у відділеннях пошти й на терміналах.",
+      s3: "Служба підтримки працює з понеділка по суботу. Телефон указано на сайті.",
+      payT: "Оплата послуг", paySub: "Онлайн, за реквізитами або готівкою в найближчому пункті.",
+      open: "Відкрити ↗", reqT: "За реквізитами", rRecipient: "Одержувач", rCode: "ЄДРПОУ", rBank: "Банк", bankName: "АТ КБ «ПриватБанк»",
+      pointsT: "Де сплатити поруч", pointsSub: "Нова Пошта, Укрпошта та термінали самообслуговування.",
+      np: "Нова Пошта", up: "Укрпошта", term: "Термінал", branch: "відділення №",
+      speedT: "Перевірка швидкості", speedSub: "Зробіть заміри, перш ніж звертатися в підтримку: так ми швидше знайдемо причину.",
+      speedHow: "Як виміряти точно", speedPick: "Відкрити тест",
+      tip1: "Підключіть пристрій кабелем, а не через Wi-Fi.", tip2: "Зупиніть завантаження, відео й оновлення на інших пристроях.",
+      tip3: "Зробіть 2–3 заміри й запишіть найгірший результат.", tip4: "Якщо швидкість нижча за тариф, зателефонуйте в підтримку й назвіть результат.",
+      cfNote: "Показує також затримку й втрати пакетів",
+      commT: "Будьте на зв’язку", viberT: "Група у Viber", viberTxt: "Оперативні повідомлення про роботи на мережі та відповіді на поширені запитання.", viberBtn: "Приєднатися до групи",
+      fbTxt: "Усі оголошення також публікуються на нашій сторінці.",
+      contT: "Контакти", hoursT: "Години роботи", hMonFri: "Понеділок – п’ятниця", hSat: "Субота", hSun: "Неділя", hOff: "вихідний",
+      hoursNote: "У неділю, державні та церковні свята не працюємо.",
+      cabT: "Особовий кабінет", cabTxt: "Баланс, платежі та дані вашого підключення.", legal: "ФОП Остолош В. В.",
+      dayAt: ["в неділю", "в понеділок", "у вівторок", "в середу", "в четвер", "в п’ятницю", "в суботу"]
+    },
+    en: {
+      langLabel: "Language", themeLabel: "Colour scheme", themeAuto: "Auto", themeLight: "Light", themeDark: "Dark",
+      navNews: "News", navPay: "Payments", navSpeed: "Speed test", navComm: "Viber", navContact: "Contacts",
+      heroEye: "Internet service provider",
+      heroH1: "Your account, payments and network news in one place",
+      heroLead: "Sign in to your account, pay for services online or check for work on the network.",
+      ctaCabinet: "Open my account", ctaPay: "Pay for internet",
+      supportT: "Technical support", copy: "Copy", copied: "Copied", copyFail: "Selected, press Ctrl+C", call: "Call", copyAll: "Copy all",
+      openNow: "Open now, until {t}", closedToday: "Closed now. We open today at {t}", closedNext: "Closed now. We open {d} at {t}",
+      routeT: "Payment points in villages",
+      newsT: "Network news", newsSub: "Posts from our Facebook page appear here automatically.",
+      fbBtn: "Facebook page", readFb: "Read on Facebook", sample: "Example",
+      sampleNote: "These are sample posts. Your Facebook posts will appear here once it is connected.",
+      liveNote: "Updated automatically from Facebook.", empty: "No posts yet.",
+      s1: "Scheduled network maintenance. The connection may drop for a short time. Thank you for your patience.",
+      s2: "Reminder: you can pay online, at post offices and at self-service terminals.",
+      s3: "Support is available Monday to Saturday. The phone number is on this page.",
+      payT: "Payments", paySub: "Online, by bank details, or in cash at the nearest point.",
+      open: "Open ↗", reqT: "Bank details", rRecipient: "Recipient", rCode: "Tax ID", rBank: "Bank", bankName: "PrivatBank JSC CB",
+      pointsT: "Where to pay nearby", pointsSub: "Nova Poshta, Ukrposhta and self-service terminals.",
+      np: "Nova Poshta", up: "Ukrposhta", term: "Terminal", branch: "branch #",
+      speedT: "Speed test", speedSub: "Measure before you contact support. It helps us find the cause faster.",
+      speedHow: "How to measure accurately", speedPick: "Open a test",
+      tip1: "Connect your device by cable instead of Wi-Fi.", tip2: "Pause downloads, video and updates on other devices.",
+      tip3: "Run 2–3 tests and note the worst result.", tip4: "If the speed is below your plan, call support and tell us the result.",
+      cfNote: "Also shows latency and packet loss",
+      commT: "Stay in touch", viberT: "Viber group", viberTxt: "Quick notices about network work and answers to common questions.", viberBtn: "Join the group",
+      fbTxt: "All announcements are also posted on our page.",
+      contT: "Contacts", hoursT: "Opening hours", hMonFri: "Monday – Friday", hSat: "Saturday", hSun: "Sunday", hOff: "closed",
+      hoursNote: "We are closed on Sundays and on public and church holidays.",
+      cabT: "My account", cabTxt: "Balance, payments and your connection details.", legal: "Sole proprietor V. Ostolosh",
+      dayAt: ["on Sunday", "on Monday", "on Tuesday", "on Wednesday", "on Thursday", "on Friday", "on Saturday"]
+    }
+  };
+
+  var VILLAGES = [
+    { n: { uk: "Нижнє Селище", en: "Nyzhnie Selyshche" }, pts: [
+      { t: "np", a: { uk: "вул. Центральна, 170", en: "Tsentralna St., 170" } },
+      { t: "up", a: { uk: "вул. Демократична, 2", en: "Demokratychna St., 2" }, no: "90440" },
+      { t: "term", a: { uk: "вул. Центральна, 107 (АВС)", en: "Tsentralna St., 107 (ABC)" } }
+    ] },
+    { n: { uk: "Копашново", en: "Kopashnovo" }, pts: [
+      { t: "np", a: { uk: "вул. Центральна, 121", en: "Tsentralna St., 121" } },
+      { t: "up", a: { uk: "вул. Центральна, 142", en: "Tsentralna St., 142" }, no: "90433" },
+      { t: "term", a: { uk: "вул. Центральна, 116 (АВС)", en: "Tsentralna St., 116 (ABC)" } }
+    ] },
+    { n: { uk: "Хустець", en: "Khustets" }, pts: [
+      { t: "up", a: { uk: "вул. Хустець, 85", en: "Khustets St., 85" }, no: "90434" },
+      { t: "term", a: { uk: "вул. Хустець, 78 (АВС)", en: "Khustets St., 78 (ABC)" } }
+    ] },
+    { n: { uk: "Нанково", en: "Nankovo" }, pts: [
+      { t: "up", a: { uk: "вул. Центральна, 465", en: "Tsentralna St., 465" }, no: "90435" },
+      { t: "term", a: { uk: "вул. Миру, 65 (міні АБС)", en: "Myru St., 65 (mini ABS)" } },
+      { t: "term", a: { uk: "вул. Центральна, 483 (у Гангура)", en: "Tsentralna St., 483 (at Hangur's)" } }
+    ] }
+  ];
+
+  var HOURS = { 1: [540, 1080], 2: [540, 1080], 3: [540, 1080], 4: [540, 1080], 5: [540, 1080], 6: [540, 960] };
+  var SAMPLE = [{ key: "s1", ago: 3 }, { key: "s2", ago: 9 }, { key: "s3", ago: 16 }];
+
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  var lang = store.get("ost-lang");
+  if (lang !== "uk" && lang !== "en") lang = String(navigator.language || "uk").toLowerCase().indexOf("en") === 0 ? "en" : "uk";
+  var theme = store.get("ost-theme");
+  if (["auto", "light", "dark"].indexOf(theme) < 0) theme = "auto";
+  var newsItems = null, newsLive = false;
+
+  function t(k, vars) {
+    var s = (I18N[lang] && I18N[lang][k] != null) ? I18N[lang][k] : (I18N.uk[k] != null ? I18N.uk[k] : k);
+    if (typeof s !== "string") return s;
+    return s.replace(/\{(\w+)\}/g, function (m, n) { return vars && vars[n] != null ? vars[n] : m; });
+  }
+  function safeUrl(u) {
+    try { var x = new URL(u); return x.protocol === "https:" ? x.href : null; } catch (e) { return null; }
+  }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  /* Theme */
+  function applyTheme(m) {
+    theme = m;
+    var r = document.documentElement;
+    if (m === "auto") r.removeAttribute("data-theme"); else r.setAttribute("data-theme", m);
+    $$("[data-theme-set]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.themeSet === m)); });
+  }
+
+  /* Opening hours (Kyiv time) */
+  function kyivNow() {
+    var tz = CONFIG.timezone, f;
+    try { f = new Intl.DateTimeFormat("en-GB", { timeZone: tz, weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false }); }
+    catch (e) { try { f = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Kiev", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false }); } catch (e2) { f = null; } }
+    var d = new Date();
+    if (!f) return { day: d.getDay(), min: d.getHours() * 60 + d.getMinutes() };
+    var p = {};
+    f.formatToParts(d).forEach(function (x) { p[x.type] = x.value; });
+    var days = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    return { day: days[p.weekday], min: (parseInt(p.hour, 10) % 24) * 60 + parseInt(p.minute, 10) };
+  }
+  function hm(m) { return Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0"); }
+  function renderStatus() {
+    var n = kyivNow(), box = $("#status"), txt = $("#statusText");
+    var today = HOURS[n.day], msg, open = false;
+    if (today && n.min >= today[0] && n.min < today[1]) { open = true; msg = t("openNow", { t: hm(today[1]) }); }
+    else if (today && n.min < today[0]) { msg = t("closedToday", { t: hm(today[0]) }); }
+    else {
+      for (var i = 1; i <= 7; i++) {
+        var d = (n.day + i) % 7;
+        if (HOURS[d]) { msg = t("closedNext", { d: t("dayAt")[d], t: hm(HOURS[d][0]) }); break; }
+      }
+    }
+    txt.textContent = msg;
+    box.classList.toggle("open", open);
+  }
+
+  /* Villages */
+  function renderVillages() {
+    var route = $("#route"), grid = $("#villages");
+    route.textContent = ""; grid.textContent = "";
+    VILLAGES.forEach(function (v) {
+      route.appendChild(el("li", "", v.n[lang]));
+      var card = el("div", "card village");
+      card.appendChild(el("h3", "", v.n[lang]));
+      var ul = el("ul", "pts");
+      v.pts.forEach(function (p) {
+        var li = el("li", "t-" + p.t);
+        var k = t(p.t) + (p.no ? ", " + t("branch") + p.no : "");
+        li.appendChild(el("span", "k", k));
+        li.appendChild(el("span", "a", p.a[lang]));
+        ul.appendChild(li);
+      });
+      card.appendChild(ul);
+      grid.appendChild(card);
+    });
+  }
+
+  /* News */
+  function fmtDate(d) {
+    try { return new Intl.DateTimeFormat(lang === "uk" ? "uk-UA" : "en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(d)); }
+    catch (e) { return ""; }
+  }
+  function renderNews() {
+    var list = $("#newsList"), note = $("#newsNote");
+    list.textContent = "";
+    var items = newsItems;
+    if (items === null) return;
+    if (!newsLive) {
+      items = SAMPLE.map(function (s) {
+        return { sample: true, text: t(s.key), date: new Date(Date.now() - s.ago * 864e5).toISOString() };
+      });
+    }
+    if (!items.length) { note.textContent = t("empty"); return; }
+    items.slice(0, 6).forEach(function (it) {
+      var card = el("article", "card post");
+      var meta = el("div", "meta");
+      var tm = el("time", "", fmtDate(it.date));
+      meta.appendChild(tm);
+      if (it.sample) meta.appendChild(el("span", "badge", t("sample")));
+      card.appendChild(meta);
+      card.appendChild(el("p", "text", it.text));
+      var u = it.url ? safeUrl(it.url) : null;
+      if (u) {
+        var a = el("a", "more", t("readFb") + " ↗");
+        a.href = u; a.target = "_blank"; a.rel = "noopener";
+        card.appendChild(a);
+      }
+      list.appendChild(card);
+    });
+    note.textContent = newsLive ? t("liveNote") : t("sampleNote");
+  }
+  function loadNews() {
+    var done = function (items, live) { newsItems = items; newsLive = live; renderNews(); };
+    try {
+      fetch(CONFIG.newsUrl, { cache: "no-cache" })
+        .then(function (r) { if (!r.ok) throw new Error("no news"); return r.json(); })
+        .then(function (d) {
+          var arr = Array.isArray(d) ? d : (d && d.items) || [];
+          arr = arr.filter(function (x) { return x && x.text; });
+          arr.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+          done(arr, true);
+        })
+        .catch(function () { done([], false); });
+    } catch (e) { done([], false); }
+  }
+
+  /* Language */
+  function applyLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+    $$("[data-i18n]").forEach(function (n) { n.textContent = t(n.dataset.i18n); });
+    $$("[data-i18n-aria]").forEach(function (n) { n.setAttribute("aria-label", t(n.dataset.i18nAria)); });
+    $$("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
+    renderVillages(); renderStatus(); renderNews();
+  }
+
+  /* Copy */
+  function copyText(text) {
+    return new Promise(function (resolve) {
+      function fallback() {
+        try {
+          var ta = document.createElement("textarea");
+          ta.value = text; ta.setAttribute("readonly", "");
+          ta.style.cssText = "position:fixed;top:0;opacity:0";
+          document.body.appendChild(ta); ta.select();
+          var ok = document.execCommand("copy");
+          ta.remove(); resolve(ok);
+        } catch (e) { resolve(false); }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { resolve(true); }, fallback);
+      } else fallback();
+    });
+  }
+  function flash(btn, ok) {
+    btn.textContent = t(ok ? "copied" : "copyFail");
+    clearTimeout(btn._t);
+    btn._t = setTimeout(function () { btn.textContent = t(btn.dataset.i18n || "copy"); }, 1800);
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    if (b.dataset.lang) { store.set("ost-lang", b.dataset.lang); applyLang(b.dataset.lang); return; }
+    if (b.dataset.themeSet) { store.set("ost-theme", b.dataset.themeSet); applyTheme(b.dataset.themeSet); return; }
+    var text = null;
+    if (b.dataset.copy) text = b.dataset.copy;
+    else if (b.dataset.copyFrom) text = $("#" + b.dataset.copyFrom).textContent.trim();
+    else if (b.id === "copyAll") {
+      text = [1, 2, 3, 4].map(function (i) { return $("#rv" + i).textContent.trim(); }).join("\n");
+    }
+    if (text == null) return;
+    copyText(text).then(function (ok) {
+      if (!ok && b.dataset.copyFrom) {
+        var node = $("#" + b.dataset.copyFrom), r = document.createRange();
+        r.selectNodeContents(node);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      }
+      flash(b, ok);
+    });
+  });
+
+  /* Links from settings */
+  var cab = safeUrl(CONFIG.cabinetUrl) || (/^http:\/\//.test(CONFIG.cabinetUrl) ? CONFIG.cabinetUrl : null);
+  if (cab) $$("a[href^='http://cabinet']").forEach(function (a) { a.href = cab; });
+  var vb = safeUrl(CONFIG.viberUrl); if (vb) $("#viberBtn").href = vb;
+  var fb = safeUrl(CONFIG.facebookUrl); if (fb) { $("#fbBtn").href = fb; $("#fbBtn2").href = fb; }
+
+  /* Speed test embed */
+  var emb = CONFIG.speedtestEmbedUrl && safeUrl(new URL(CONFIG.speedtestEmbedUrl, location.href).href);
+  if (emb) {
+    var f = document.createElement("iframe");
+    f.className = "frame"; f.src = emb; f.loading = "lazy"; f.title = "Speed test";
+    f.allow = "";
+    var box = $("#speedBox"); box.textContent = ""; box.appendChild(f);
+  }
+
+  $("#year").textContent = new Date().getFullYear();
+  applyTheme(theme);
+  applyLang(lang);
+  loadNews();
+  setInterval(renderStatus, 60000);
+})();
+</script>
+
+</body>
+</html>
