@@ -149,7 +149,7 @@ h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; le
 /* Village route */
 .route-wrap { padding-block: 8px 12px; }
 .route-label { font: 500 0.78rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 16px; }
-.route { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 0; }
+.route { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px 0; }
 .route li { position: relative; padding-top: 22px; font-weight: 500; padding-right: 10px; }
 .route li::before { content: ""; position: absolute; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--ink); z-index: 1; }
 .route li::after { content: ""; position: absolute; left: 14px; right: 0; top: 5px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--line) 0 35%, var(--signal) 50%, var(--line) 65% 100%); background-size: 300% 100%; animation: pulse 4.5s linear infinite; }
@@ -187,6 +187,7 @@ h3 { font: 600 1.02rem/1.3 var(--f-body); }
 .req dd.mono { font-size: 0.92rem; }
 .card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
 .villages { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; margin-top: 16px; }
+.village .note { margin-top: 0; }
 .village h3 { font-family: var(--f-display); font-weight: 500; font-size: 1rem; margin-bottom: 14px; }
 .pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .pts li { display: grid; gap: 2px; padding-left: 12px; border-left: 3px solid var(--line); }
@@ -228,6 +229,7 @@ h3 { font: 600 1.02rem/1.3 var(--f-body); }
 .fields .full { grid-column: 1 / -1; }
 .field label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
 .field input, .field select, .field textarea { width: 100%; min-height: 48px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 1rem/1.4 var(--f-body); }
+.field .hint { margin: 6px 0 0; font-size: 0.82rem; color: var(--muted); }
 .field textarea { min-height: 128px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 3px solid var(--focus); outline-offset: 1px; border-color: var(--ink); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -244,7 +246,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
 }
 @media (max-width: 640px) {
   .route { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .route li:nth-child(2)::after { display: none; }
+  .route li:nth-child(2n)::after { display: none; }
   .req > div { grid-template-columns: minmax(0, 1fr) auto; }
   .req dt { grid-column: 1 / -1; }
   .btn { flex: 1 1 100%; }
@@ -317,7 +319,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
           <h2 id="newsH" data-i18n="newsT">Новини мережі</h2>
           <p data-i18n="newsSub">Публікації з нашої сторінки у Facebook з’являються тут автоматично.</p>
         </div>
-        <a class="btn small" id="fbBtn" href="https://www.facebook.com/" target="_blank" rel="noopener" data-i18n="fbBtn">Сторінка у Facebook</a>
+        <a class="btn small" id="fbBtn" href="https://www.facebook.com/ostolosh.net" target="_blank" rel="noopener" data-i18n="fbBtn">Сторінка у Facebook</a>
       </div>
       <div class="news" id="newsList"></div>
       <p class="note" id="newsNote"></p>
@@ -334,7 +336,9 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
         <div class="methods">
           <a class="method" target="_blank" rel="noopener" href="https://next.privat24.ua/payments/form/%7B%22token%22%3A%221333ab9f-985a-4970-970a-a54d54dfacc9%22%7D">Privat24 <span data-i18n="open">Відкрити ↗</span></a>
           <a class="method" target="_blank" rel="noopener" href="https://easypay.ua/ua/catalog/internet/ostolosh-int">EasyPay <span data-i18n="open">Відкрити ↗</span></a>
+          <!-- City24 тимчасово недоступний. Розкоментуйте, коли сервіс запрацює:
           <a class="method" target="_blank" rel="noopener" href="https://city24.ua/ua/popolnit-internet/ostolosh-net">City24 <span data-i18n="open">Відкрити ↗</span></a>
+          -->
         </div>
         <div class="card">
           <div class="card-head">
@@ -392,12 +396,12 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
         <div class="card viber-card">
           <h3 data-i18n="viberT">Група у Viber</h3>
           <p data-i18n="viberTxt">Оперативні повідомлення про роботи на мережі та відповіді на поширені запитання.</p>
-          <a class="btn viber" id="viberBtn" href="https://invite.viber.com/" target="_blank" rel="noopener" data-i18n="viberBtn">Приєднатися до групи</a>
+          <a class="btn viber" id="viberBtn" href="https://invite.viber.com/?g=1gyybAvqcEeHzqnvGdsdl2SpwuPCRLwx" target="_blank" rel="noopener" data-i18n="viberBtn">Приєднатися до групи</a>
         </div>
         <div class="card">
           <h3>Facebook</h3>
           <p data-i18n="fbTxt">Усі оголошення також публікуються на нашій сторінці.</p>
-          <a class="btn" id="fbBtn2" href="https://www.facebook.com/" target="_blank" rel="noopener" data-i18n="fbBtn">Сторінка у Facebook</a>
+          <a class="btn" id="fbBtn2" href="https://www.facebook.com/ostolosh.net" target="_blank" rel="noopener" data-i18n="fbBtn">Сторінка у Facebook</a>
         </div>
       </div>
     </section>
@@ -436,6 +440,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
         <div class="fields">
           <div class="field"><label for="cName" data-i18n="fName">Ім’я</label><input id="cName" name="name" type="text" autocomplete="name" maxlength="80" required></div>
           <div class="field"><label for="cPhone" data-i18n="fPhone">Телефон</label><input id="cPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="096 000 00 00" required></div>
+          <div class="field full"><label for="cContract" data-i18n="fContract">Номер договору</label><input id="cContract" name="contract" type="text" autocomplete="off" inputmode="text" maxlength="30" placeholder="123456"><p class="hint" data-i18n="fContractHint">Допоможе швидше знайти ваш обліковий запис. Якщо не пам’ятаєте, залиште порожнім.</p></div>
           <div class="field full"><label for="cVillage" data-i18n="fVillage">Село</label><select id="cVillage" name="village"></select></div>
           <div class="field full"><label for="cMsg" data-i18n="fMsg">Повідомлення</label><textarea id="cMsg" name="message" maxlength="1500" required></textarea></div>
           <div class="hp" aria-hidden="true"><label for="cWeb">Website</label><input id="cWeb" name="website" type="text" tabindex="-1" autocomplete="off"></div>
@@ -457,8 +462,8 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
   /* ===== Settings: change these on your own server ===== */
   var CONFIG = {
     cabinetUrl: "http://cabinet.ostolosh.net",
-    viberUrl: "https://invite.viber.com/?g=1gyybAvqcEeHzqnvGdsdl2SpwuPCRLwx",      // put your group invite link here
-    facebookUrl: "https://www.facebook.com/ostolosh.net",   // put your page link here
+    viberUrl: "https://invite.viber.com/?g=1gyybAvqcEeHzqnvGdsdl2SpwuPCRLwx",
+    facebookUrl: "https://www.facebook.com/ostolosh.net",
     newsUrl: "news.json",                       // file produced by news-sync.py
     contactUrl: "contact.php",                             // e.g. "contact.php" (see contact.php, it forwards to Telegram)
     speedtestEmbedUrl: "",                      // e.g. "/speedtest/" for a self-hosted LibreSpeed
@@ -486,7 +491,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       payT: "Оплата послуг", paySub: "Онлайн, за реквізитами або готівкою в найближчому пункті.",
       open: "Відкрити ↗", reqT: "За реквізитами", rRecipient: "Одержувач", rCode: "ЄДРПОУ", rBank: "Банк", bankName: "АТ КБ «ПриватБанк»",
       pointsT: "Де сплатити поруч", pointsSub: "Нова Пошта, Укрпошта та термінали самообслуговування.",
-      np: "Нова Пошта", up: "Укрпошта", term: "Термінал", branch: "відділення №",
+      noPoints: "Пунктів оплати в селі поки немає. Сплатіть онлайн або зателефонуйте в підтримку.", np: "Нова Пошта", up: "Укрпошта", term: "Термінал", branch: "відділення №",
       speedT: "Перевірка швидкості", speedSub: "Зробіть заміри, перш ніж звертатися в підтримку: так ми швидше знайдемо причину.",
       speedHow: "Як виміряти точно", speedPick: "Відкрити тест",
       tip1: "Підключіть пристрій кабелем, а не через Wi-Fi.", tip2: "Зупиніть завантаження, відео й оновлення на інших пристроях.",
@@ -499,9 +504,9 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       cabT: "Особовий кабінет", cabTxt: "Баланс, платежі та дані вашого підключення.", legal: "ФОП Остолош В. В.",
       formT: "Написати нам", formSub: "Опишіть питання про підключення, оплату чи швидкість. Повідомлення надійде до нас у Telegram.",
       formPriv: "Ці дані потрібні лише для відповіді на ваше звернення.",
-      fName: "Ім’я", fPhone: "Телефон", fVillage: "Село", fVillageOther: "Інше", fMsg: "Повідомлення", fSend: "Надіслати", fSending: "Надсилаємо…",
+      fContract: "Номер договору", fContractHint: "Допоможе швидше знайти ваш обліковий запис. Якщо не пам’ятаєте, залиште порожнім.", fName: "Ім’я", fPhone: "Телефон", fVillage: "Село", fVillageOther: "Інше", fMsg: "Повідомлення", fSend: "Надіслати", fSending: "Надсилаємо…",
       fOk: "Дякуємо! Повідомлення надіслано. Ми зв’яжемося з вами в робочий час.",
-      fErrFields: "Заповніть ім’я, телефон і повідомлення.",
+      fErrFields: "Заповніть ім’я, телефон і повідомлення.", fErrContract: "Номер договору може містити лише літери, цифри, дефіс і навскісну риску.",
       fErrNet: "Не вдалося надіслати. Спробуйте ще раз або зателефонуйте в підтримку.",
       fErrRate: "Забагато спроб. Зачекайте хвилину й повторіть.",
       fDemo: "У цій демонстраційній версії форма не підключена до Telegram. На вашому сервері вона надсилатиме повідомлення в бот.",
@@ -527,7 +532,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       payT: "Payments", paySub: "Online, by bank details, or in cash at the nearest point.",
       open: "Open ↗", reqT: "Bank details", rRecipient: "Recipient", rCode: "Tax ID", rBank: "Bank", bankName: "PrivatBank JSC CB",
       pointsT: "Where to pay nearby", pointsSub: "Nova Poshta, Ukrposhta and self-service terminals.",
-      np: "Nova Poshta", up: "Ukrposhta", term: "Terminal", branch: "branch #",
+      noPoints: "No payment points in this village yet. Pay online or call support.", np: "Nova Poshta", up: "Ukrposhta", term: "Terminal", branch: "branch #",
       speedT: "Speed test", speedSub: "Measure before you contact support. It helps us find the cause faster.",
       speedHow: "How to measure accurately", speedPick: "Open a test",
       tip1: "Connect your device by cable instead of Wi-Fi.", tip2: "Pause downloads, video and updates on other devices.",
@@ -540,9 +545,9 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       cabT: "My account", cabTxt: "Balance, payments and your connection details.", legal: "Sole proprietor V. Ostolosh",
       formT: "Write to us", formSub: "Tell us about a connection, payment or speed issue. Your message reaches us in Telegram.",
       formPriv: "We use these details only to reply to your request.",
-      fName: "Name", fPhone: "Phone", fVillage: "Village", fVillageOther: "Other", fMsg: "Message", fSend: "Send", fSending: "Sending…",
+      fContract: "Contract number", fContractHint: "Helps us find your account faster. Leave empty if you do not remember it.", fName: "Name", fPhone: "Phone", fVillage: "Village", fVillageOther: "Other", fMsg: "Message", fSend: "Send", fSending: "Sending…",
       fOk: "Thank you! Your message was sent. We will contact you during working hours.",
-      fErrFields: "Please fill in your name, phone and message.",
+      fErrFields: "Please fill in your name, phone and message.", fErrContract: "The contract number may contain only letters, digits, hyphens and slashes.",
       fErrNet: "Could not send. Try again or call support.",
       fErrRate: "Too many attempts. Wait a minute and try again.",
       fDemo: "In this demo the form is not connected to Telegram. On your server it will send messages to the bot.",
@@ -565,6 +570,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       { t: "up", a: { uk: "вул. Хустець, 85", en: "Khustets St., 85" }, no: "90434" },
       { t: "term", a: { uk: "вул. Хустець, 78 (АВС)", en: "Khustets St., 78 (ABC)" } }
     ] },
+    { n: { uk: "Лунка", en: "Lunka" }, pts: [] },
     { n: { uk: "Нанково", en: "Nankovo" }, pts: [
       { t: "up", a: { uk: "вул. Центральна, 465", en: "Tsentralna St., 465" }, no: "90435" },
       { t: "term", a: { uk: "вул. Миру, 65 (міні АБС)", en: "Myru St., 65 (mini ABS)" } },
@@ -655,7 +661,8 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
         li.appendChild(el("span", "a", p.a[lang]));
         ul.appendChild(li);
       });
-      card.appendChild(ul);
+      if (!v.pts.length) card.appendChild(el("p", "note", t("noPoints")));
+      else card.appendChild(ul);
       grid.appendChild(card);
     });
   }
@@ -725,12 +732,14 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     e.preventDefault();
     var name = $("#cName").value.trim(), phone = $("#cPhone").value.trim(), msg = $("#cMsg").value.trim();
     if (name.length < 2 || phone.replace(/\D/g, "").length < 7 || msg.length < 5) { formMsg("err", t("fErrFields")); return; }
+    var contract = $("#cContract").value.trim();
+    if (contract && !/^[\p{L}\p{N}\-\/. ]{1,30}$/u.test(contract)) { formMsg("err", t("fErrContract")); return; }
     if ($("#cWeb").value) { formMsg("ok", t("fOk")); return; }
     if (!CONFIG.contactUrl) { formMsg("", t("fDemo")); return; }
     var btn = $("#cSend"), vi = $("#cVillage").value;
     btn.disabled = true; btn.textContent = t("fSending"); formMsg("", "");
     var payload = {
-      name: name, phone: phone, message: msg, lang: lang,
+      name: name, phone: phone, contract: contract, message: msg, lang: lang,
       village: vi === "other" ? "—" : VILLAGES[+vi].n.uk
     };
     fetch(CONFIG.contactUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
@@ -742,7 +751,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       .then(function (d) {
         if (!d || !d.ok) throw new Error("fail");
         formMsg("ok", t("fOk"));
-        $("#cName").value = ""; $("#cPhone").value = ""; $("#cMsg").value = "";
+        $("#cName").value = ""; $("#cPhone").value = ""; $("#cContract").value = ""; $("#cMsg").value = "";
       })
       .catch(function (err) { formMsg("err", t(err && err.message === "rate" ? "fErrRate" : "fErrNet")); })
       .then(function () { btn.disabled = false; btn.textContent = t("fSend"); });
