@@ -30,6 +30,8 @@
   --panel-line: #353531;
   --ok: #17794A;
   --viber: #6A56E6;
+  --call: #178A4C;
+  --viber-solid: #6F5BEF;
   --f-display: "Unbounded", "Onest", system-ui, sans-serif;
   --f-body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -146,6 +148,9 @@ h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; le
 .support .phone { color: var(--accent); }
 .support .btn.small { background: transparent; color: var(--panel-ink); border-color: var(--panel-line); }
 .support .btn.small:hover { border-color: var(--accent); }
+.support .btn.small.call { background: var(--call); border-color: var(--call); color: #fff; font-weight: 600; }
+.support .btn.small.viber { background: var(--viber-solid); border-color: var(--viber-solid); color: #fff; font-weight: 600; }
+.support .btn.small.call:hover, .support .btn.small.viber:hover { filter: brightness(1.12); border-color: #fff; }
 .support .status { border-top-color: var(--panel-line); color: var(--panel-muted); }
 .support .status.open { color: var(--panel-ink); }
 .support :focus-visible { outline-color: var(--accent); }
@@ -310,12 +315,12 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
           <div class="ph">
             <span class="lbl" data-i18n="phWork">роб.</span>
             <div class="line"><a class="phone" id="phoneLink" href="tel:+380966847704">+380 (96) 684-77-04</a></div>
-            <div class="row"><button type="button" class="btn small" data-copy="+380 (96) 684-77-04" data-i18n="copy">Копіювати</button><a class="btn small" href="tel:+380966847704" data-i18n="call">Подзвонити</a><a class="btn small viber" href="viber://chat?number=%2B380966847704" data-i18n="writeViber">Написати у Viber</a></div>
+            <div class="row"><button type="button" class="btn small" data-copy="+380 (96) 684-77-04" data-i18n="copy">Копіювати</button><a class="btn small call" href="tel:+380966847704" data-i18n="call">Подзвонити</a><a class="btn small viber" href="viber://chat?number=%2B380966847704" data-i18n="writeViber">Написати у Viber</a></div>
           </div>
           <div class="ph">
             <span class="lbl" data-i18n="phMob">моб.</span>
             <div class="line"><a class="phone" href="tel:+380673705263">+380 (67) 370-52-63</a></div>
-            <div class="row"><button type="button" class="btn small" data-copy="+380 (67) 370-52-63" data-i18n="copy">Копіювати</button><a class="btn small" href="tel:+380673705263" data-i18n="call">Подзвонити</a><a class="btn small viber" href="viber://chat?number=%2B380673705263" data-i18n="writeViber">Написати у Viber</a></div>
+            <div class="row"><button type="button" class="btn small" data-copy="+380 (67) 370-52-63" data-i18n="copy">Копіювати</button><a class="btn small call" href="tel:+380673705263" data-i18n="call">Подзвонити</a><a class="btn small viber" href="viber://chat?number=%2B380673705263" data-i18n="writeViber">Написати у Viber</a></div>
           </div>
         </div>
         <div class="status" id="status" role="status"><span class="dot" aria-hidden="true"></span><span id="statusText"></span></div>
