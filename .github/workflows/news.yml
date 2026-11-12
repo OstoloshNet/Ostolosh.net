@@ -1,1 +1,33 @@
+name: Sync Facebook news
 
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch posts from Facebook
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_TOKEN: ${{ secrets.FB_TOKEN }}
+        run: python3 news-sync.py
+
+      - name: Commit news.json if it changed
+        run: |
+          git config user.name "news-bot"
+          git config user.email "news-bot@users.noreply.github.com"
+          git add news.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update news.json"
+            git push
+          fi
