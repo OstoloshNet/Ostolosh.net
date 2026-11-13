@@ -311,7 +311,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     </div>
   </header>
   <nav class="nav" aria-label="Menu">
-    <a href="#news" data-i18n="navNews">Новини</a>
+    <!-- <a href="#news" data-i18n="navNews">Новини</a> -->
     <a href="#pay" data-i18n="navPay">Оплата</a>
     <a href="#speed" data-i18n="navSpeed">Швидкість</a>
     <a href="#community" data-i18n="navComm">Viber</a>
@@ -352,6 +352,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       <ol class="route" id="route"></ol>
     </div>
 
+    <!-- Розділ «Новини» тимчасово вимкнений. Щоб увімкнути, приберіть коментар навколо розділу і навколо пункту «Новини» в меню.
     <section id="news" aria-labelledby="newsH">
       <div class="sec-head">
         <div>
@@ -363,6 +364,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       <div class="news" id="newsList"></div>
       <p class="note" id="newsNote"></p>
     </section>
+    -->
 
     <section id="pay" aria-labelledby="payH">
       <div class="sec-head">
@@ -718,6 +720,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
   }
   function renderNews() {
     var list = $("#newsList"), note = $("#newsNote");
+    if (!list) return;
     list.textContent = "";
     var items = newsItems;
     if (items === null) return;
@@ -746,6 +749,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     note.textContent = newsLive ? t("liveNote") : t("sampleNote");
   }
   function loadNews() {
+    if (!$("#newsList")) return;
     var done = function (items, live) { newsItems = items; newsLive = live; renderNews(); };
     try {
       fetch(CONFIG.newsUrl, { cache: "no-cache" })
@@ -863,7 +867,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
   var cab = safeUrl(CONFIG.cabinetUrl) || (/^http:\/\//.test(CONFIG.cabinetUrl) ? CONFIG.cabinetUrl : null);
   if (cab) $$("a[href^='http://cabinet']").forEach(function (a) { a.href = cab; });
   var vb = safeUrl(CONFIG.viberUrl); if (vb) $("#viberBtn").href = vb;
-  var fb = safeUrl(CONFIG.facebookUrl); if (fb) { $("#fbBtn").href = fb; $("#fbBtn2").href = fb; }
+  var fb = safeUrl(CONFIG.facebookUrl); if (fb) { var fb1 = $("#fbBtn"), fb2 = $("#fbBtn2"); if (fb1) fb1.href = fb; if (fb2) fb2.href = fb; }
 
   /* Speed test embed */
   var emb = CONFIG.speedtestEmbedUrl && safeUrl(new URL(CONFIG.speedtestEmbedUrl, location.href).href);
