@@ -204,7 +204,9 @@ section { margin-top: 28px; padding: 30px; background: var(--band); border: 1px 
 .method:hover { border-color: var(--ink); }
 .method.privat { background: #377F18; border-color: #377F18; color: #fff; }
 .method.easypay { background: #1E63D6; border-color: #1E63D6; color: #fff; }
-.method.privat:hover, .method.easypay:hover { filter: brightness(1.12); border-color: var(--ink); }
+.method.city24 { background: #19C37D; border-color: #19C37D; color: #06281A; }
+.method.city24 span { color: #06281A; }
+.method.privat:hover, .method.easypay:hover, .method.city24:hover { filter: brightness(1.12); border-color: var(--ink); }
 .method.privat span, .method.easypay span { color: #fff; }
 .method span { color: var(--accent-text); font-weight: 500; font-size: 0.9rem; white-space: nowrap; }
 h3 { font: 600 1.02rem/1.3 var(--f-body); }
@@ -377,9 +379,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
         <div class="methods">
           <a class="method privat" target="_blank" rel="noopener" href="https://next.privat24.ua/payments/form/%7B%22token%22%3A%221333ab9f-985a-4970-970a-a54d54dfacc9%22%7D">Privat24 <span data-i18n="payNow">Сплатити ↗</span></a>
           <a class="method easypay" target="_blank" rel="noopener" href="https://easypay.ua/ua/catalog/internet/ostolosh-int">EasyPay <span data-i18n="payNow">Сплатити ↗</span></a>
-          <!-- City24 тимчасово недоступний. Розкоментуйте, коли сервіс запрацює:
-          <a class="method" target="_blank" rel="noopener" href="https://city24.ua/ua/popolnit-internet/ostolosh-net">City24 <span data-i18n="payNow">Сплатити ↗</span></a>
-          -->
+          <a class="method city24" target="_blank" rel="noopener" href="https://city24.ua/ua/popolnit-internet/ostolosh-net">City24 <span data-i18n="payNow">Сплатити ↗</span></a>
         </div>
         <div class="card">
           <div class="card-head">
