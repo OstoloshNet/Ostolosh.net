@@ -4,13 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<style>:root{color-scheme:light}[hidden]{display:none!important}img{max-width:100%}</style>
-<title>Ostolosh.net</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<title>Ostolosh.net — інтернет у Нанкові, Нижньому Селищі, Копашнові, Хустці та Лунці</title>
+<meta name="description" content="Інтернет-провайдер Ostolosh.net: особовий кабінет, оплата онлайн і за реквізитами, пункти оплати в селах, телефони технічної підтримки та години роботи.">
+<link rel="canonical" href="https://ostolosh.net/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#FFD400">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:site_name" content="Ostolosh.net">
+<meta property="og:url" content="https://ostolosh.net/">
+<meta property="og:title" content="Ostolosh.net — інтернет-провайдер">
+<meta property="og:description" content="Особовий кабінет, оплата послуг і технічна підтримка: +380 (96) 684-77-04.">
+<meta property="og:image" content="https://ostolosh.net/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
 <style>
+[hidden] { display: none !important; }
+img { max-width: 100%; }
 /* Layout: one calm column of cards. A fibre line linking four villages runs under the hero, and payment points are grouped by village. */
 :root {
   --bg: #F2F2F0;
@@ -37,10 +52,10 @@
   --viber-solid: #6F5BEF;
   --f-display: "Unbounded", "Onest", system-ui, sans-serif;
   --f-body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root {
     --bg: #0A0A0A;
     --surface: #151515;
     --ink: #F4F4F0;
@@ -63,29 +78,6 @@
     --viber: #8A78FF;
     color-scheme: dark;
   }
-}
-:root[data-theme="dark"] {
-  --bg: #0A0A0A;
-  --surface: #151515;
-  --ink: #F4F4F0;
-  --muted: #A5A59C;
-  --line: #2B2B27;
-  --edge: #45453E;
-  --band: #121211;
-  --shadow: none;
-  --accent: #FFD400;
-  --accent-ink: #0A0A0A;
-  --accent-soft: #2B2400;
-  --accent-text: #FFD400;
-  --focus: #FFD400;
-  --signal: #FFD400;
-  --panel: #1B1B18;
-  --panel-ink: #F4F4F0;
-  --panel-muted: #A5A59C;
-  --panel-line: #3A3A34;
-  --ok: #5BD08F;
-  --viber: #8A78FF;
-  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -116,8 +108,7 @@ h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; le
 .seg { display: inline-flex; border: 1px solid var(--edge); border-radius: 10px; background: var(--surface); padding: 3px; gap: 2px; }
 .seg button { font: 500 0.82rem/1 var(--f-body); color: var(--muted); background: transparent; border: 0; border-radius: 7px; padding: 8px 11px; cursor: pointer; min-height: 34px; }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
-.nav { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
-.nav::-webkit-scrollbar { display: none; }
+.nav { display: flex; flex-wrap: wrap; gap: 6px; padding-block: 10px; }
 .nav a { white-space: nowrap; text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; padding: 8px 14px; border-radius: 999px; border: 1px solid transparent; }
 .nav a:hover { color: var(--ink); border-color: var(--line); background: var(--surface); }
 
@@ -279,6 +270,8 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
   section { padding: 18px 14px; border-radius: 16px; margin-top: 20px; }
   .card { padding: 18px; }
   .card.post { padding: 0; }
+  .nav { gap: 2px; margin-inline: -8px; }
+  .nav a { padding: 8px 9px; font-size: 0.9rem; }
   .route { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .route li:nth-child(2n)::after { display: none; }
   .req > div { grid-template-columns: minmax(0, 1fr) auto; }
@@ -293,6 +286,8 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
   .route li::after { animation: none; background: var(--line); }
 }
 </style>
+</head>
+<body>
 
 <div class="wrap">
   <header class="top">
@@ -304,11 +299,6 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       <div class="seg" role="group" data-i18n-aria="langLabel" id="langSeg">
         <button type="button" data-lang="uk" aria-pressed="true">UA</button>
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
-      </div>
-      <div class="seg" role="group" data-i18n-aria="themeLabel" id="themeSeg">
-        <button type="button" data-theme-set="auto" data-i18n="themeAuto" aria-pressed="true">Авто</button>
-        <button type="button" data-theme-set="light" data-i18n="themeLight" aria-pressed="false">Світла</button>
-        <button type="button" data-theme-set="dark" data-i18n="themeDark" aria-pressed="false">Темна</button>
       </div>
     </div>
   </header>
@@ -324,8 +314,8 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     <div class="hero">
       <div>
         <p class="eyebrow" data-i18n="heroEye">Інтернет-провайдер</p>
-        <h1 data-i18n="heroH1">Рахунок, оплата й новини мережі в одному місці</h1>
-        <p class="lead" data-i18n="heroLead">Увійдіть в особовий кабінет, сплатіть послуги онлайн або дізнайтеся про роботи на мережі.</p>
+        <h1 data-i18n="heroH1">Кабінет, оплата й підтримка в одному місці</h1>
+        <p class="lead" data-i18n="heroLead">Увійдіть в особовий кабінет, сплатіть послуги онлайн або зв’яжіться з технічною підтримкою.</p>
         <div class="cta">
           <a class="btn primary" id="cabinetBtn" href="http://cabinet.ostolosh.net" target="_blank" rel="noopener" data-i18n="ctaCabinet">Увійти в кабінет</a>
           <a class="btn" href="#pay" data-i18n="ctaPay">Сплатити за інтернет</a>
@@ -391,7 +381,9 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
             <div><dt data-i18n="rCode">ЄДРПОУ</dt><dd class="mono" id="rv2">3234120698</dd><dd><button type="button" class="btn small" data-copy-from="rv2" data-i18n="copy">Копіювати</button></dd></div>
             <div><dt>IBAN</dt><dd class="mono" id="rv3">UA663052990000026001013601971</dd><dd><button type="button" class="btn small" data-copy-from="rv3" data-i18n="copy">Копіювати</button></dd></div>
             <div><dt data-i18n="rBank">Банк</dt><dd id="rv4" data-i18n="bankName">АТ КБ «ПриватБанк»</dd><dd><button type="button" class="btn small" data-copy-from="rv4" data-i18n="copy">Копіювати</button></dd></div>
+            <div><dt data-i18n="rPurpose">Призначення платежу</dt><dd id="rv5">Оплата за інтернет, договір №</dd><dd><button type="button" class="btn small" data-copy-from="rv5" data-i18n="copy">Копіювати</button></dd></div>
           </dl>
+          <p class="note" data-i18n="purposeHint">У призначенні платежу обов’язково допишіть номер договору та прізвище абонента, інакше ми не зможемо зарахувати оплату.</p>
         </div>
       </div>
       <h3 style="margin-top:32px" data-i18n="pointsT">Де сплатити поруч</h3>
@@ -517,11 +509,11 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
 
   var I18N = {
     uk: {
-      langLabel: "Мова", themeLabel: "Колірна схема", themeAuto: "Авто", themeLight: "Світла", themeDark: "Темна",
+      langLabel: "Мова",
       navNews: "Новини", navPay: "Оплата", navSpeed: "Швидкість", navComm: "Viber", navContact: "Контакти",
       heroEye: "Інтернет-провайдер",
-      heroH1: "Рахунок, оплата й новини мережі в одному місці",
-      heroLead: "Увійдіть в особовий кабінет, сплатіть послуги онлайн або дізнайтеся про роботи на мережі.",
+      heroH1: "Кабінет, оплата й підтримка в одному місці",
+      heroLead: "Увійдіть в особовий кабінет, сплатіть послуги онлайн або зв’яжіться з технічною підтримкою.",
       ctaCabinet: "Увійти в кабінет", ctaPay: "Сплатити за інтернет",
       supportT: "Технічна підтримка", copy: "Копіювати", copied: "Скопійовано", copyFail: "Виділено, натисніть Ctrl+C", call: "Подзвонити", copyAll: "Копіювати все",
       openNow: "Зараз відчинено, до {t}", closedToday: "Зараз зачинено. Відкриємося сьогодні о {t}", closedNext: "Зараз зачинено. Відкриємося {d} о {t}",
@@ -534,7 +526,8 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       s2: "Нагадуємо: сплатити за послуги можна онлайн, у відділеннях пошти й на терміналах.",
       s3: "Служба підтримки працює з понеділка по суботу. Телефон указано на сайті.",
       payT: "Оплата послуг", paySub: "Онлайн, за реквізитами або готівкою в найближчому пункті.",
-      open: "Відкрити ↗", payNow: "Сплатити ↗", reqT: "За реквізитами", rRecipient: "Одержувач", rCode: "ЄДРПОУ", rBank: "Банк", bankName: "АТ КБ «ПриватБанк»",
+      open: "Відкрити ↗", payNow: "Сплатити ↗", reqT: "За реквізитами", rRecipient: "Одержувач", rCode: "ЄДРПОУ", rBank: "Банк", bankName: "АТ КБ «ПриватБанк»", rPurpose: "Призначення платежу",
+      purposeHint: "У призначенні платежу обов’язково допишіть номер договору та прізвище абонента, інакше ми не зможемо зарахувати оплату.",
       pointsT: "Де сплатити поруч", pointsSub: "Нова Пошта, Укрпошта та термінали самообслуговування.",
       noPoints: "Пунктів оплати в селі поки немає. Сплатіть онлайн або зателефонуйте в підтримку.", np: "Нова Пошта", up: "Укрпошта", term: "Термінал", branch: "відділення №",
       speedT: "Перевірка швидкості", speedSub: "Зробіть заміри, перш ніж звертатися в підтримку: так ми швидше знайдемо причину.",
@@ -558,11 +551,11 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       dayAt: ["в неділю", "в понеділок", "у вівторок", "в середу", "в четвер", "в п’ятницю", "в суботу"]
     },
     en: {
-      langLabel: "Language", themeLabel: "Colour scheme", themeAuto: "Auto", themeLight: "Light", themeDark: "Dark",
+      langLabel: "Language",
       navNews: "News", navPay: "Payments", navSpeed: "Speed test", navComm: "Viber", navContact: "Contacts",
       heroEye: "Internet service provider",
-      heroH1: "Your account, payments and network news in one place",
-      heroLead: "Sign in to your account, pay for services online or check for work on the network.",
+      heroH1: "Your account, payments and support in one place",
+      heroLead: "Sign in to your account, pay for services online or contact technical support.",
       ctaCabinet: "Open my account", ctaPay: "Pay for internet",
       supportT: "Technical support", copy: "Copy", copied: "Copied", copyFail: "Selected, press Ctrl+C", call: "Call", copyAll: "Copy all",
       openNow: "Open now, until {t}", closedToday: "Closed now. We open today at {t}", closedNext: "Closed now. We open {d} at {t}",
@@ -575,7 +568,8 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
       s2: "Reminder: you can pay online, at post offices and at self-service terminals.",
       s3: "Support is available Monday to Saturday. The phone number is on this page.",
       payT: "Payments", paySub: "Online, by bank details, or in cash at the nearest point.",
-      open: "Open ↗", payNow: "Pay ↗", reqT: "Bank details", rRecipient: "Recipient", rCode: "Tax ID", rBank: "Bank", bankName: "PrivatBank JSC CB",
+      open: "Open ↗", payNow: "Pay ↗", reqT: "Bank details", rRecipient: "Recipient", rCode: "Tax ID", rBank: "Bank", bankName: "PrivatBank JSC CB", rPurpose: "Payment purpose",
+      purposeHint: "Keep the purpose in Ukrainian and add your contract number and surname, otherwise we cannot match the payment to your account.",
       pointsT: "Where to pay nearby", pointsSub: "Nova Poshta, Ukrposhta and self-service terminals.",
       noPoints: "No payment points in this village yet. Pay online or call support.", np: "Nova Poshta", up: "Ukrposhta", term: "Terminal", branch: "branch #",
       speedT: "Speed test", speedSub: "Measure before you contact support. It helps us find the cause faster.",
@@ -635,9 +629,7 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
   };
 
   var lang = store.get("ost-lang");
-  if (lang !== "uk" && lang !== "en") lang = String(navigator.language || "uk").toLowerCase().indexOf("en") === 0 ? "en" : "uk";
-  var theme = store.get("ost-theme");
-  if (["auto", "light", "dark"].indexOf(theme) < 0) theme = "auto";
+  if (lang !== "en") lang = "uk";
   var newsItems = null, newsLive = false;
 
   function t(k, vars) {
@@ -653,14 +645,6 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     if (cls) e.className = cls;
     if (text != null) e.textContent = text;
     return e;
-  }
-
-  /* Theme */
-  function applyTheme(m) {
-    theme = m;
-    var r = document.documentElement;
-    if (m === "auto") r.removeAttribute("data-theme"); else r.setAttribute("data-theme", m);
-    $$("[data-theme-set]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.themeSet === m)); });
   }
 
   /* Opening hours (Kyiv time) */
@@ -845,12 +829,11 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
     var b = e.target.closest("button");
     if (!b) return;
     if (b.dataset.lang) { store.set("ost-lang", b.dataset.lang); applyLang(b.dataset.lang); return; }
-    if (b.dataset.themeSet) { store.set("ost-theme", b.dataset.themeSet); applyTheme(b.dataset.themeSet); return; }
     var text = null;
     if (b.dataset.copy) text = b.dataset.copy;
     else if (b.dataset.copyFrom) text = $("#" + b.dataset.copyFrom).textContent.trim();
     else if (b.id === "copyAll") {
-      text = [1, 2, 3, 4].map(function (i) { return $("#rv" + i).textContent.trim(); }).join("\n");
+      text = [1, 2, 3, 4, 5].map(function (i) { return $("#rv" + i).textContent.trim(); }).join("\n");
     }
     if (text == null) return;
     copyText(text).then(function (ok) {
@@ -879,7 +862,6 @@ footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line);
   }
 
   $("#year").textContent = new Date().getFullYear();
-  applyTheme(theme);
   applyLang(lang);
   loadNews();
   setInterval(renderStatus, 60000);
