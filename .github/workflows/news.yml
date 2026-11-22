@@ -1,8 +1,10 @@
 name: Sync Facebook news
 
 on:
-  schedule:
-    - cron: "*/30 * * * *"
+  # Розклад вимкнений, поки розділ «Новини» на сайті закоментований.
+  # Щоб увімкнути знову, розкоментуйте два рядки нижче.
+  # schedule:
+  #   - cron: "*/30 * * * *"
   workflow_dispatch:
 
 permissions:
